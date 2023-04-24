@@ -6,10 +6,11 @@
  */
 int _printf(const char *format, ...)
 {
+	int counter = 0;
 	va_list ap;
 
 	va_start(ap, format);
-	int counter = 0;
+
 
 	while (*format != '\0')
 	{
@@ -23,17 +24,17 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'c')
 			{
-				char c = va_args(ap, int);
+				char c = va_arg(ap, int);
 
 				putchar(c);
 				counter++;
 			}
 			else if (*format == 's')
 			{
-				char *str = va_args(ap, char *);
+				char *str = va_arg(ap, char *);
 
 				fputs(str, stdout);
-				counter += strlen(str)
+				counter += strlen(str);
 			}
 		}
 		else
