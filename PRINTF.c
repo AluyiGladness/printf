@@ -1,58 +1,49 @@
 #include "main.h"
 /**
- * _print - function that produces output
+ * _printf - function that produces output
  * @format: character string
  * Return: number of characters printed
  */
-int _print(const char *format, ...)
+int _printf(const char *format, ...)
 {
-	int counter = 0;
 	va_list ap;
 
 	va_start(ap, format);
+	int counter = 0;
 
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format == '%')
+		{
 			format++;
-
-		switch (*format)
-		case 'c':
-		{
-			char c = (char) va_args(ap, int);
-
-			write(STDOUT_FILENO, &c, 1);
-			counter++;
-			break;
-		}
-		case 's':
-		{
-			char *s = va_args(ap, char *);
-
-			while (*s)
+			if (*format == '%')
 			{
-				write(STDOUT_FILENO, s, 1);
-				s++;
+				putchar('%');
 				counter++;
 			}
-			break;
+			else if (*format == 'c')
+			{
+				char c = va_args(ap, int);
 
-		}
-		case '%':
-		{
-			write(STDOUT_FILENO, '%', 1);
-			counter++;
-			break;
+				putchar(c);
+				counter++;
+			}
+			else if (*format == 's')
+			{
+				char *str = va_args(ap, char *);
+
+				fputs(str, stdout);
+				counter += strlen(str)
+			}
 		}
 		else
 		{
-			write(STDOUT_FILENO, format, 1)
-				counter++;
+			putchar(*format);
+			counter++;
 		}
 		format++;
 	}
-
 	va_end(ap);
-
 	return (counter);
 }
+
