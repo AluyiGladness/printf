@@ -6,8 +6,10 @@
  */
 int _printf(const char *format, ...)
 {
+	char c;
 	int counter = 0;
 	va_list ap;
+	char *s;
 
 	va_start(ap, format);
 
@@ -17,24 +19,24 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '%')
+			switch (*format)
 			{
-				putchar('%');
-				counter++;
-			}
-			else if (*format == 'c')
-			{
-				char c = va_arg(ap, int);
+				case 'c':
+					c = va_arg(ap, int);
 
-				putchar(c);
-				counter++;
-			}
-			else if (*format == 's')
-			{
-				char *str = va_arg(ap, char *);
+					putchar(c);
+					counter++;
+					break;
+				case 's':
+					s = va_arg(ap, char *);
 
-				fputs(str, stdout);
-				counter += strlen(str);
+					fputs(s, stdout);
+					counter++;
+					break;
+				case '%':
+					putchar('%');
+					counter++;
+					break;
 			}
 		}
 		else
@@ -43,8 +45,9 @@ int _printf(const char *format, ...)
 			counter++;
 		}
 		format++;
+
 	}
 	va_end(ap);
+
 	return (counter);
 }
-
