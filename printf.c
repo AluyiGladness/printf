@@ -6,13 +6,11 @@
  */
 int _printf(const char *format, ...)
 {
-	char c;
 	int counter = 0;
 	va_list ap;
-	char *s;
+	char c, *s;
 
 	va_start(ap, format);
-
 
 	while (*format != '\0')
 	{
@@ -23,13 +21,11 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					c = va_arg(ap, int);
-
 					putchar(c);
 					counter++;
 					break;
 				case 's':
 					s = va_arg(ap, char *);
-
 					fputs(s, stdout);
 					counter++;
 					break;
@@ -48,6 +44,5 @@ int _printf(const char *format, ...)
 
 	}
 	va_end(ap);
-
 	return (counter);
 }
