@@ -1,3 +1,4 @@
+#include "main.h"
 /**
  * print_mychar - prints char
  * @value: char

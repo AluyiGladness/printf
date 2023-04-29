@@ -9,7 +9,7 @@
  * return: printed values or char
  */
 
-void myprintf(const char *format, ...)
+void _printf(const char *format, ...)
 {
 	va_list ap;
 
