@@ -1,4 +1,6 @@
 #include "main.h"
+#include <string.h>
+#include <stdarg.h>
 /**
  * _printf - function that produces output
  * @format: character string
@@ -20,14 +22,14 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					c = va_arg(ap, int);
+					c = (char) va_arg(ap, int);
 					putchar(c);
 					counter++;
 					break;
 				case 's':
 					s = va_arg(ap, char *);
 					fputs(s, stdout);
-					counter++;
+					counter+= strlen(s);
 					break;
 				case '%':
 					putchar('%');
