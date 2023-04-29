@@ -1,18 +1,20 @@
 #include "main.h"
 #include <string.h>
+#include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 /**
- * _printf - function that produces output
- * @format: character string
- * Return: number of characters printed
+ * myprintf - a similar function to the standard printf function
+ * @format: content to print
+ * return: printed values or char
  */
-int _printf(const char *format, ...)
+
+void myprintf(const char *format, ...)
 {
-	int counter = 0;
 	va_list ap;
-	char c, *s;
 
 	va_start(ap, format);
+	int length = 0;
 
 	while (*format != '\0')
 	{
@@ -22,29 +24,29 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					c = (char) va_arg(ap, int);
-					putchar(c);
-					counter++;
+					print_mychar((char) va_arg(ap, int), &length);
 					break;
 				case 's':
-					s = va_arg(ap, char *);
-					fputs(s, stdout);
-					counter+= strlen(s);
+					print_mystring(va_arg(ap, char*), &length);
 					break;
-				case '%':
-					putchar('%');
-					counter++;
+				case 'd':
+					print_integer(va_arg(ap, int), 10, &len);
+					break;
+				case 'x':
+					print_integer(va_arg(ap, int), 16, &len);
+					break;
+				default:
+					/*discard unknown format */
 					break;
 			}
 		}
 		else
 		{
+			len++;
 			putchar(*format);
-			counter++;
 		}
 		format++;
-
 	}
 	va_end(ap);
-	return (counter);
 }
+
