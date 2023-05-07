@@ -1,48 +1,48 @@
 #include "main.h"
 /**
  * _printf - function that produces output
- * @format: character string
+ * @format: character format
  * Return: number of characters printed
  */
+
 int _printf(const char *format, ...)
 {
-	int counter = 0;
 	va_list ap;
-	char c, *s;
+	int counter = 0;
+	const char *j = format;
 
 	va_start(ap, format);
 
-	while (*format != '\0')
+	while (*j != '\0')
 	{
-		if (*format == '%')
+		if (*j == '%')
 		{
-			format++;
-			switch (*format)
+			switch (*(++j))
 			{
 				case 'c':
-					c = va_arg(ap, int);
-					putchar(c);
-					counter++;
+					counter += _putchar(va_arg(ap, int));
 					break;
 				case 's':
-					s = va_arg(ap, char *);
-					fputs(s, stdout);
-					counter++;
+					const char *str = va_arg(ap, char *);
+
+					while (*str != '\0')
+					{
+						counter += _putchar(*str++);
+					}
 					break;
 				case '%':
-					putchar('%');
-					counter++;
+					counter += _putchar('%');
 					break;
 			}
-		}
-		else
-		{
-			putchar(*format);
-			counter++;
-		}
-		format++;
 
+		} else
+		{
+			counter += _putchar(*j);
+		}
+
+		j++;
 	}
 	va_end(ap);
 	return (counter);
 }
+
