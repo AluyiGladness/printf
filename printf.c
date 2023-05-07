@@ -1,88 +1,49 @@
-#include "main.h"
-#include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <stdlib.h>
-/**
-<<<<<<< HEAD
- * _printf - function that produces output
- * @format: character format
- * Return: number of characters printed
- */
 
+/**
+ * _printf - print output according to a format
+ * @format: character string containing directives
+ * Return: the number of characters printed
+ */
 int _printf(const char *format, ...)
 {
-	va_list ap;
-	int counter = 0;
-	const char *j = format;
-=======
- * myprintf - a similar function to the standard printf function
- * @format: content to print
- * return: printed values or char
- */
+	va_list args;
+	int count = 0;
+	const char *s = va_arg(args, const char *
 
-void _printf(const char *format, ...)
-{
-	va_list ap;
->>>>>>> 678da6fe982616bc7fd6384a1e06d153c1425a45
-
-	va_start(ap, format);
-	int length = 0;
-
-	while (*j != '\0')
+	va_start(args, format);
+	while (*format)
 	{
-		if (*j == '%')
+		if (*format == '%')
 		{
-			switch (*(++j))
+			switch (*(++format))
 			{
 				case 'c':
-<<<<<<< HEAD
-					counter += _putchar(va_arg(ap, int));
+					putchar(va_arg(args, int));
+					count++;
 					break;
 				case 's':
-					const char *str = va_arg(ap, char *);
-
-					while (*str != '\0')
-					{
-						counter += _putchar(*str++);
-					}
+					for (; const char *s = va_arg(args, const char *); s++)
+					putchar(*s);
+					count++;
 					break;
 				case '%':
-					counter += _putchar('%');
-					break;
-			}
-
-		} else
-		{
-			counter += _putchar(*j);
-		}
-
-		j++;
-=======
-					print_mychar((char) va_arg(ap, int), &length);
-					break;
-				case 's':
-					print_mystring(va_arg(ap, char*), &length);
-					break;
-				case 'd':
-					print_integer(va_arg(ap, int), 10, &len);
-					break;
-				case 'x':
-					print_integer(va_arg(ap, int), 16, &len);
+					putchar('%');
+					count++;
 					break;
 				default:
-					/*discard unknown format */
-					break;
+					putchar('%');
+					putchar(*format);
+					count += 2;
 			}
 		}
 		else
-		{
-			len++;
 			putchar(*format);
-		}
-		format++;
->>>>>>> 678da6fe982616bc7fd6384a1e06d153c1425a45
-	}
-	va_end(ap);
-}
+			count++;
 
+		format++;
+	}
+	va_end(args);
+	return (count);
+}
