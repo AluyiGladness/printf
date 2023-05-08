@@ -1,6 +1,14 @@
 #include "main.h"
 
 /**
+ * _puts - similar to the standard puts function
+ * @s - string to print to stdout
+ * Return: count of string
+ */
+int _puts(const char *s);
+
+
+/**
  * _printf - print output according to a format
  * @format: character string containing directives
  * Return: the number of characters printed
