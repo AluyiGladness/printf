@@ -5,6 +5,7 @@
  * @format: character string containing directives
  * Return: the number of characters printed
  */
+
 int _printf(const char *format, ...)
 {
 	va_list ap;
@@ -48,6 +49,6 @@ int_puts(const char *s)
 		s++;
 	}
 	counter++;
-	return counter;
+	return (counter);
 
 }
