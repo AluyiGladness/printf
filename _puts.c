@@ -17,7 +17,6 @@ int _puts(const char *s)
 		counter++;
 		s++;
 	}
-	_putchar('\n');
 	counter++;
 	return (counter);
 }
