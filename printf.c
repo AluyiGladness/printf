@@ -18,20 +18,16 @@ int _printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-		{
 			format++;
 			if (*format == 'c')
 				counter += _putchar(va_arg(ap, int));
 			else if (*format == 's')
-				counter += puts(va_arg(ap, char *));
+				counter += _puts(va_arg(ap, char *));
 			else if (*format == '%')
 				counter += _putchar('%');
 			else
-			{
 				counter += _putchar('%');
 				counter += _putchar(*format);
-			}
-		}
 		else
 			counter += _putchar(*format);
 		format++;
@@ -41,3 +37,17 @@ int _printf(const char *format, ...)
 	return (counter);
 }
 
+int_puts(const char *s)
+{
+	int counter = 0;
+
+	while (*s != '\0')
+	{
+		_putchar(*s);
+		counter++;
+		s++;
+	}
+	counter++;
+	return counter;
+
+}

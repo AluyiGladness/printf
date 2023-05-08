@@ -7,7 +7,7 @@
 #include <stdlib.h>
 int _printf(const char *format, ...);
 int _putchar(char c);
-int puts(const char *s);
+int _puts(const char *s);
 
 #endif
 
