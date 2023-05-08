@@ -1,14 +1,6 @@
 #include "main.h"
 
 /**
- * _puts - similar to the standard puts function
- * @s - string to print to stdout
- * Return: count of string
- */
-int _puts(const char *s);
-
-
-/**
  * _printf - print output according to a format
  * @format: character string containing directives
  * Return: the number of characters printed
@@ -27,6 +19,7 @@ int _printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
+		{
 			format++;
 			if (*format == 'c')
 				counter += _putchar(va_arg(ap, int));
@@ -35,8 +28,11 @@ int _printf(const char *format, ...)
 			else if (*format == '%')
 				counter += _putchar('%');
 			else
+			{
 				counter += _putchar('%');
 				counter += _putchar(*format);
+			}
+		}
 		else
 			counter += _putchar(*format);
 		format++;
@@ -46,17 +42,3 @@ int _printf(const char *format, ...)
 	return (counter);
 }
 
-int_puts(const char *s)
-{
-	int counter = 0;
-
-	while (*s != '\0')
-	{
-		_putchar(*s);
-		counter++;
-		s++;
-	}
-	counter++;
-	return (counter);
-
-}
