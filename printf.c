@@ -23,7 +23,7 @@ int _printf(const char *format, ...)
 			if (*format == 'c')
 				counter += _putchar(va_arg(ap, int));
 			else if (*format == 's')
-				counter += _puts(va_arg(ap, char *));
+				counter += puts(va_arg(ap, char *));
 			else if (*format == '%')
 				counter += _putchar('%');
 			else
